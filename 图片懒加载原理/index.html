@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .scrolltop {
+        position: fixed;
+        top: 0;
+        left: 0px;
+        background-color: red;
+        font-size: 30px;
+      }
+      .winHeight {
+        position: fixed;
+        top: 50px;
+        left: 0px;
+        background-color: red;
+        font-size: 30px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="scrolltop"></div>
+    <div class="winHeight"></div>
+    <div class="container">
+      <img src="./1.png" data-src="./2.png" alt="" />
+      <img src="./1.png" data-src="./2.png" alt="" />
+      <img src="./1.png" data-src="./2.png" alt="" />
+      <img src="./1.png" data-src="./2.png" alt="" />
+      <img src="./1.png" data-src="./2.png" alt="" />
+      <img src="./1.png" data-src="./2.png" alt="" />
+      <img src="./1.png" data-src="./2.png" alt="" />
+      <img src="./1.png" data-src="./2.png" alt="" />
+    </div>
+    <script>
+      let imgs = document.querySelectorAll("img");
+      let scrolltopInnerhtml = document.querySelector(".scrolltop");
+      let winHeighthtml = document.querySelector(".winHeight");
+      function lazyload() {
+        let scrollTop =
+          document.body.scrollTop || document.documentElement.scrollTop;
+        let winHeight = window.innerHeight;
+
+        scrolltopInnerhtml.innerHTML = "scrollTop:" + scrollTop + "px";
+        winHeighthtml.innerHTML = "winHeight:" + winHeight + "px";
+
+        for (let i = 0; i < imgs.length; i++) {
+          console.log(
+            `[Log] imgs[${i}].offsetTop-->`,
+            imgs[i].offsetTop,
+            winHeight,
+            scrollTop
+          );
+          if (imgs[i].offsetTop < winHeight + scrollTop) {
+            imgs[i].src = imgs[i].getAttribute("data-src");
+            // console.log("[Log] imgs[i]-->", i);
+          }
+        }
+      }
+      lazyload();
+      window.addEventListener("scroll", lazyload);
+    </script>
+  </body>
+</html>

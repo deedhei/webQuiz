@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <a href="#/home">home</a>
+      <a href="#/about">about</a>
+      <div class="router-view"></div>
+    </div>
+    <script>
+      // 1.获取router-view
+      const routerViewEl = document.querySelector(".router-view");
+      // 2.监听hashchange
+      window.addEventListener("hashchange", function () {
+        switch (location.hash) {
+          case "#/home":
+            routerViewEl.innerHTML = "home";
+            break;
+          case "#/about":
+            routerViewEl.innerHTML = "about";
+            break;
+          default:
+            routerViewEl.innerHTML = "default";
+            break;
+        }
+      });
+    </script>
+  </body>
+</html>
